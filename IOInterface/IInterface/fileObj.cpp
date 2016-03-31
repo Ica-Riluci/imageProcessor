@@ -31,14 +31,15 @@ char* files::getFileSegment(int start, int endp, char s[])
 
 int bmpFiles::constructFileHeader()
 {
-	BMType = getBMType(files::getFileSegment(0, typeSite, buffer));
+	BMType = getBMType(getFileSegment(0, typeSite, buffer));
 	if (BMType == -1)
 		return 0;
-	BMSize = getDWORD(files::getFileSegment(typeSite + 1, sizeSite, buffer));
-	CIAStartSite = getDWORD(files::getFileSegment(sizeSite + rDWORD + 1, offsetSite, buffer));
-	infoSize = getDWORD(files::getFileSegment(offsetSite + 1, infoSizeSite, buffer));
-	bitWid = getDWORD(files::getFileSegment(infoSizeSite + 1, bitWidSite, buffer));
-	bitHei = getDWORD(files::getFileSegment(bitWidSite + 1, bitHeiSite, buffer));
+	BMSize = getDWORD(getFileSegment(typeSite + 1, sizeSite, buffer));
+	CIAStartSite = getDWORD(getFileSegment(sizeSite + rDWORD + 1, offsetSite, buffer));
+	infoSize = getDWORD(getFileSegment(offsetSite + 1, infoSizeSite, buffer));
+	bitWid = getDWORD(getFileSegment(infoSizeSite + 1, bitWidSite, buffer));
+	bitHei = getDWORD(getFileSegment(bitWidSite + 1, bitHeiSite, buffer));
+	planes = getWORD(getFileSegment(bitHeiSite + 1, planesSite, buffer));
 }
 
 int bmpFiles::getBMType(char s[])
@@ -78,16 +79,30 @@ int bmpFiles::getBMType(char s[])
 	return -1;
 }
 
-int bmpFiles::getDWORD(char s[])
+int files::getDWORD(char s[])
 {
-	int l = 8;
+	int l = 4;
 	int base  = 1, i, r = 0;
 	unsigned char x;
 	for (i = 0; i < l; ++i)
 	{
 		x = s[i];
 		r += x * base;
-		base *= bitSize;
+		base *= byteSize;
+	}
+	return r;
+}
+
+int files::getWORD(char s[])
+{
+	int l = 2;
+	int base  = 1, i, r = 0;
+	unsigned char x;
+	for (i = 0; i < l; ++i)
+	{
+		x = s[i];
+		r += x * base;
+		base *= byteSize;
 	}
 	return r;
 }

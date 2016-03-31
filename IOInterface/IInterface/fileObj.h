@@ -9,6 +9,7 @@ class files
 public :
 	ifstream file;
 	char *buffer;
+	const int byteSize = 256;
 
 public :
 	files(){}
@@ -18,6 +19,8 @@ public :
 public :
 	char* getData();
 	char* getFileSegment(int start, int endp, char s[]);
+	int getDWORD(char s[]);
+	int getWORD(char s[]);
 };
 
 class bmpFiles:public files
@@ -38,16 +41,15 @@ public :
 	const int sizeSite = 5;
 	const int offsetSite = 13;
 	const int infoSizeSite = 17;
-	const int bitSize = 256;
 	const int bitWidSite = 21;
 	const int bitHeiSite = 25;
+	const int planesSite = 27;
 	int CIAStartSite;
-	int BMType, BMSize, infoSize, bitWid, bitHei;
+	int BMType, BMSize, infoSize, bitWid, bitHei, planes;
 	char *bmpInfoHeader, *rgbQuad, *CIArray;
 
 public :
 	int constructFileHeader();
 	int getBMType(char s[]);
-	int getDWORD(char s[]);
 };
 #endif
