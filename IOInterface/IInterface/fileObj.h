@@ -44,8 +44,15 @@ public :
 	const int bitWidSite = 21;
 	const int bitHeiSite = 25;
 	const int planesSite = 27;
+	const int bitsPPSite = 31;
+	const int BMDataSize = 35;
+	const int hResSite = 39;
+	const int vResSite = 43;
+	const int colorsSite = 47;
+	const int impColorsSite = 50;
 	int CIAStartSite;
-	int BMType, BMSize, infoSize, bitWid, bitHei, planes;
+	int BMType, BMSize, infoSize, bitWid, bitHei, planes, bitsPP, compression;
+	int hRes, vRes, colors, impColors;
 	char *bmpInfoHeader, *rgbQuad, *CIArray;
 
 public :

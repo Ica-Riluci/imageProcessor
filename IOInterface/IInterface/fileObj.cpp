@@ -40,6 +40,12 @@ int bmpFiles::constructFileHeader()
 	bitWid = getDWORD(getFileSegment(infoSizeSite + 1, bitWidSite, buffer));
 	bitHei = getDWORD(getFileSegment(bitWidSite + 1, bitHeiSite, buffer));
 	planes = getWORD(getFileSegment(bitHeiSite + 1, planesSite, buffer));
+	bitsPP = getWORD(getFileSegment(planesSite + 1, bitsPPSite, buffer));
+	compression = getDWORD(getFileSegment(bitsPPSite + 1, BMDataSize, buffer));
+	hRes = getDWORD(getFileSegment(BMDataSize + 1, hResSite, buffer));
+	vRes = getDWORD(getFileSegment(hResSite + 1, vResSite, buffer));
+	colors = getDWORD(getFileSegment(vResSite + 1, colorsSite, buffer));
+	impColors = getDWORD(getFileSegment(colorsSite + 1, offsetSite + infoSize + 1, buffer));
 }
 
 int bmpFiles::getBMType(char s[])
