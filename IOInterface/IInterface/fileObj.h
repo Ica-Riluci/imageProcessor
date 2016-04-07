@@ -10,6 +10,7 @@ public :
 	ifstream file;
 	char *buffer;
 	const int byteSize = 256;
+	int len;
 
 public :
 	files(){}
@@ -53,10 +54,11 @@ public :
 	int CIAStartSite;
 	int BMType, BMSize, infoSize, bitWid, bitHei, planes, bitsPP, compression;
 	int hRes, vRes, colors, impColors;
-	char *bmpInfoHeader, *rgbQuad, *CIArray;
+	char *rgbQUAD, *CIArray;
 
 public :
 	int constructFileHeader();
+	int constructRGB();
 	int getBMType(char s[]);
 };
 #endif

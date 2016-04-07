@@ -14,6 +14,7 @@ char* files::getData()
 		int length = file.tellg();
 		file.seekg(0, file.beg);
 		char *buff = new char[length];
+		len = length;
 		file.read(buff, length);
 		file.close();
 		return buff;
@@ -111,4 +112,11 @@ int files::getWORD(char s[])
 		base *= byteSize;
 	}
 	return r;
+}
+
+int bmpFiles::constructRGB()
+{
+	rgbQUAD = getFileSegment(offsetSite + infoSize + 1 + rDWORD, offsetSite + infoSize + rDWORD + (1 << bitsPP), buffer);
+	CIArray = getFileSegment(CIAStartSite, files::len, buffer);
+	return 0;
 }
