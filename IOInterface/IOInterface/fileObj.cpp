@@ -52,7 +52,7 @@ int BMPFiles::constructBMPHeader()
     CIAStartSite = transToNum(4, scratchData(sizeSite + rDWORD + 1, offsetSite - sizeSite - rDWORD, buffer));
     infoSize = transToNum(4, scratchData(offsetSite + 1, infoSizeSite - offsetSite, buffer));
     bitWid = transToNum(4, scratchData(infoSizeSite + 1, bitWidSite - infoSizeSite, buffer));
-    bithei = transToNum(4, scratchData(bitWidSite + 1, bitHeiSite - bitWidSite, buffer));
+    bitHei = transToNum(4, scratchData(bitWidSite + 1, bitHeiSite - bitWidSite, buffer));
     planes = transToNum(4, scratchData(bitHeiSite + 1, planesSite - bitHeiSite, buffer));
     bitsPP = transToNum(2, scratchData(planesSite + 1, bitsPPSite - planesSite, buffer));
     compression = transToNum(4, scratchData(bitsPPSite + 1, compressionSite - bitsPPSite, buffer));
@@ -73,7 +73,7 @@ void BMPFiles::constructCIArray()
     CIArray = scratchData(CIAStartSite, fileLen - CIAStartSite + 1, buffer);
 }
 
-int bmpFiles::getBMType(char s[])
+int BMPFiles::getBMType(char s[])
 {
 	if (s[0] == 'B')
 	{

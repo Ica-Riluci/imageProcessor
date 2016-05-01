@@ -92,7 +92,7 @@ public :
 	const int colorsSite = 49;
 	const int impColorsSite = 53;
     int BMType;
-    int CIAStartSite, infoSize, BMDataSize;
+    int CIAStartSite, BMDataSize;
 	int BMSize, infoSize, bitWid, bitHei, planes, bitsPP, compression;
 	int hRes, vRes, colors, impColors;
 	char *rgbQUAD, *CIArray;
