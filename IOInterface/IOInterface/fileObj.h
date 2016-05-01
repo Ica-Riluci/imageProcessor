@@ -29,7 +29,8 @@ public :
     fName        : the Name of the target file
     pushToBuffer : push data int to [buffer];
     scratchData  : scratch data in [tar[]\ at [site] by the length of [len]
-    transDWORD   : transform a string, [source[]], into an integer*/
+    transDWORD   : transform a string, [source[]], into an integer
+    */
 
 public :
     ifstream inFile;
