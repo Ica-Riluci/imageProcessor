@@ -85,7 +85,7 @@ public :
 	const int bitHeiSite = 25;
 	const int planesSite = 29;
 	const int bitsPPSite = 31;
-	const int compressionSite = 33
+	const int compressionSite = 33;
 	const int BMDataSizeSite = 37;
 	const int hResSite = 41;
 	const int vResSite = 45;

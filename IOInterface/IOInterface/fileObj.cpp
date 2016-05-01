@@ -45,7 +45,7 @@ BMPFiles::BMPFiles(string fName)
 
 int BMPFiles::constructBMPHeader()
 {
-    BMType = getBMType(scratchData(0, typeSite, buffer));
+    BMType = getBMType(scratchData(0, typeSite + 1, buffer));
     if (BMType == -1)
         return 0;
     BMSize = transToNum(4, scratchData(typeSite + 1, sizeSite - typeSite, buffer));
