@@ -24,7 +24,7 @@ public :
     ~files(){}
     char* pushToBuffer();
     char* scratchData(int site, int len, char tar[]);
-    int transToNum(int l, char source[])
+    int transToNum(int l, char source[]);
     /*
     fName        : the Name of the target file
     pushToBuffer : push data int to [buffer];
@@ -45,7 +45,7 @@ public :
     const int byteSize = 8;
 };
 
-class BMPFiles : virtual public files
+class BMPFiles:virtual public files
 {
 
     /*
@@ -56,10 +56,17 @@ public :
     BMPFiles(){}
     ~BMPFiles(){}
     BMPFiles(string fName);
-    void constructBMPHeader();
-    void construcRGBQUAD();
+    int constructBMPHeader();
+    void constructRGBQUAD();
     void constructCIArray();
-    int getBMType();
+    int getBMType(char s[]);
+    /*
+    constructBMPHeader : construct the file header of BMP files
+    constructRGBQUAD   : construct the RGBQUAD if there is
+    constructCIArray   : construct the CIArray
+    getBMPType         : get the type of the bitmap
+    */
+
 
 public :
     const int BM = 0;
@@ -84,10 +91,15 @@ public :
 	const int colorsSite = 49;
 	const int impColorsSite = 53;
     int BMType;
-    int CIAStartSite, infoSize;
+    int CIAStartSite, infoSize, BMDataSize;
 	int BMSize, infoSize, bitWid, bitHei, planes, bitsPP, compression;
 	int hRes, vRes, colors, impColors;
 	char *rgbQUAD, *CIArray;
+    /*
+    BMType       : the type of the bitmap
+    CIAStartSite : the start site of CIArray
+    bitsPP       : bits per pixel
+    */
 
 };
 

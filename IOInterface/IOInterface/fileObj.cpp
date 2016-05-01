@@ -8,11 +8,11 @@ char* files::pushToBuffer()
     {
         inFile.seekg(0, inFile.end);
         int length = inFile.tellg();
-        file.seekg(0, inFile.beg);
+        inFile.seekg(0, inFile.beg);
         char *result = new char[length];
         fileLen = length;
-        file.read(result, length);
-        file.close();
+        inFile.read(result, length);
+        inFile.close();
         return result;
     }
 }
@@ -43,12 +43,12 @@ BMPFiles::BMPFiles(string fName)
     constructCIArray();
 }
 
-void BMPFiles::constructBMPHeader()
+int BMPFiles::constructBMPHeader()
 {
     BMType = getBMType(scratchData(0, typeSite, buffer));
     if (BMType == -1)
         return 0;
-    BMSize = transToNum(4, scratchData(typeSite + 1, sizeSite - typeSize, buffer));
+    BMSize = transToNum(4, scratchData(typeSite + 1, sizeSite - typeSite, buffer));
     CIAStartSite = transToNum(4, scratchData(sizeSite + rDWORD + 1, offsetSite - sizeSite - rDWORD, buffer));
     infoSize = transToNum(4, scratchData(offsetSite + 1, infoSizeSite - offsetSite, buffer));
     bitWid = transToNum(4, scratchData(infoSizeSite + 1, bitWidSite - infoSizeSite, buffer));
@@ -63,7 +63,7 @@ void BMPFiles::constructBMPHeader()
     impColors = transToNum(4, scratchData(colorsSite + 1, impColorsSite - colorsSite, buffer));
 }
 
-void BMPFiles::construcRGBQUAD()
+void BMPFiles::constructRGBQUAD()
 {
     rgbQUAD = scratchData(impColorsSite + 1, CIAStartSite - impColorsSite - 1, buffer);
 }
