@@ -22,7 +22,6 @@ class files
 public :
     files(){}
     ~files(){}
-    files(string fName);
     char* pushToBuffer();
     char* scratchData(int site, int len, char tar[]);
     int transToNum(int l, char source[])
@@ -42,9 +41,54 @@ public :
     fileLen : then length of the [buffer]
     */
 
-
 public :
     const int byteSize = 8;
+};
+
+class BMPFiles : virtual public files
+{
+
+    /*
+    This class supports the analysis of BMP files.
+    */
+
+public :
+    BMPFiles(){}
+    ~BMPFiles(){}
+    BMPFiles(string fName);
+    void constructBMPHeader();
+    void construcRGBQUAD();
+    void constructCIArray();
+    int getBMType();
+
+public :
+    const int BM = 0;
+    const int BA = 1;
+    const int CI = 2;
+    const int CP = 3;
+    const int IC = 4;
+    const int PT = 5;
+	const int rDWORD = 4;
+	const int typeSite = 1;
+	const int sizeSite = 5;
+	const int offsetSite = 13;
+	const int infoSizeSite = 17;
+	const int bitWidSite = 21;
+	const int bitHeiSite = 25;
+	const int planesSite = 29;
+	const int bitsPPSite = 31;
+	const int compressionSite = 33
+	const int BMDataSizeSite = 37;
+	const int hResSite = 41;
+	const int vResSite = 45;
+	const int colorsSite = 49;
+	const int impColorsSite = 53;
+    int BMType;
+    int CIAStartSite, infoSize;
+	int BMSize, infoSize, bitWid, bitHei, planes, bitsPP, compression;
+	int hRes, vRes, colors, impColors;
+	char *rgbQUAD, *CIArray;
+
 };
 
 #endif

@@ -29,7 +29,7 @@ class bmpFiles:public files
 public :
 	bmpFiles(){}
 	~bmpFiles(){}
-	
+
 public :
 	const int BM = 0;
 	const int BA = 1;
@@ -45,12 +45,13 @@ public :
 	const int bitWidSite = 21;
 	const int bitHeiSite = 25;
 	const int planesSite = 27;
-	const int bitsPPSite = 31;
-	const int BMDataSize = 35;
-	const int hResSite = 39;
-	const int vResSite = 43;
-	const int colorsSite = 47;
-	const int impColorsSite = 50;
+	const int bitsPPSite = 29;
+	const int compressionSite = 33
+	const int BMDataSizeSite = 37;
+	const int hResSite = 41;
+	const int vResSite = 45;
+	const int colorsSite = 49;
+	const int impColorsSite = 53;
 	int CIAStartSite;
 	int BMType, BMSize, infoSize, bitWid, bitHei, planes, bitsPP, compression;
 	int hRes, vRes, colors, impColors;
