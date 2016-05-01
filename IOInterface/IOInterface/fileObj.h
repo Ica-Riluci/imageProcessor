@@ -86,8 +86,8 @@ public :
 	const int infoSizeSite = 17;
 	const int bitWidSite = 21;
 	const int bitHeiSite = 25;
-	const int planesSite = 29;
-	const int bitsPPSite = 31;
+	const int planesSite = 27;
+	const int bitsPPSite = 29;
 	const int compressionSite = 33;
 	const int BMDataSizeSite = 37;
 	const int hResSite = 41;
