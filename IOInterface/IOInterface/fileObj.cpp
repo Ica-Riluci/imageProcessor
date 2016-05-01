@@ -1,7 +1,5 @@
 #include "fileObj.h"
 
-using namespace std;
-
 char* files::pushToBuffer()
 {
     if (inFile)

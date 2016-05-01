@@ -7,9 +7,12 @@ which can open, close and read and write a file, and a son class of it, BMPFiles
 which supports the analysis of the data of BMP files.
 */
 
+#include "stdafx.h"
 #include <iostream>
 #include <fstream>
 #include <string>
+
+using namespace std;
 
 class files
 {
