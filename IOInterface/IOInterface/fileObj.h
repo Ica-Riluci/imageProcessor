@@ -25,9 +25,11 @@ class files
 public :
     files(){}
     ~files(){}
-    char* pushToBuffer();
+    char* popToBuffer();
     char* scratchData(int site, int len, char tar[]);
+    void pushToFile(string source);
     int transToNum(int l, char source[]);
+    string transToString(int l, int source);
     /*
     fName        : the Name of the target file
     pushToBuffer : push data int to [buffer];
@@ -37,6 +39,7 @@ public :
 
 public :
     ifstream inFile;
+    ofstream outFile;
     char* buffer;
     int fileLen;
     /*
@@ -64,6 +67,11 @@ public :
     void constructRGBQUAD();
     void constructCIArray();
     int getBMType(char s[]);
+    void outp24Bit(string fName);
+    void outpHeader();
+    int sizeOfBody(int bpp);
+    int sizeOfRGBQUAD(int bpp);
+    int sizeOfCIArray(int bpp, int wid, int hei);
     /*
     constructBMPHeader : construct the file header of BMP files
     constructRGBQUAD   : construct the RGBQUAD if there is

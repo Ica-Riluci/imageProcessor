@@ -1,6 +1,6 @@
 #include "fileObj.h"
 
-char* files::pushToBuffer()
+char* files::popToBuffer()
 {
     if (inFile)
     {
@@ -34,7 +34,7 @@ int files::transToNum(int l, char source[])
 BMPFiles::BMPFiles(string fName)
 {
     inFile.open(fName, ios_base::binary);
-    buffer = pushToBuffer();
+    buffer = popToBuffer();
     constructBMPHeader();
     if (bitsPP <= 8)
         constructRGBQUAD();
@@ -106,4 +106,93 @@ int BMPFiles::getBMType(char s[])
 			return -1;
 	}
 	return -1;
+}
+
+inline void pushToFile(string source)
+{
+    outFile << source;
+}
+
+void BMPFiles::outp24Bit(string fName)
+{
+    outFile.open(fName, ios_base::binary);
+    outpHeader();
+}
+
+void BMPFiles::outpHeader()
+{
+    pushToFile("BM");
+    pushToFile(transToString(4, impColorsSite + 1 + sizeOfBody(bitsPP)));
+    for (int i = 0; i < 4; ++i)
+        pushToFile((string)((char)0));
+    pushToFile(transToString(4, CIAStartSite));
+    pushToFile(transToString(4, infoSize));
+    pushToFile(transToString(4, bitWid));
+    pushToFile(transToString(4, bitHei));
+    pushToFile(transToString(2, 1));
+    pushToFile(transToString(2, bitsPP));
+    pushToFile(transToString(4, compression));
+    pushToFile(transToString(4, BMDataSize));
+    pushToFile(transToString(4, hRes));
+    pushToFile(transToString(4, vRes));
+    pushToFile(transToString(4, colors));
+    pushToFile(transToString(4, impColors));
+}
+
+string files::transToString(int l, int source)
+{
+    string result = "";
+    for (int i = 0; i < l; ++i)
+    {
+        result += (string)((char)(source % (1 << byteSize)));
+        source /= 1 << byteSize;
+    }
+    return result;
+}
+
+inline int BMPFiles::sizeOfBody(int bpp)
+{
+    return (sizeOfRGBQUAD(bpp) + sizeOfCIArray(bpp, bitWid, bitHei));
+}
+
+inline int BMPFiles::sizeofRGBQUAD(int bpp)
+{
+    switch (bpp)
+    {
+    case 1 :
+        return 8;
+        break;
+    case 4 :
+        return 64;
+        break;
+    case 8 :
+        return 1024;
+        break;
+    case 16 :
+    case 24 :
+        return 0;
+        break;
+    default :
+        break;
+    }
+}
+
+inline int BMPFiles::sizeofCIArray(int bpp, int wid, int hei)
+{
+    switch (bpp)
+    {
+    case 4 :
+        int c = wid / 8;
+        if (wid % 8 > 0)
+            ++c;
+        return (hei * c * 4);
+        break;
+    case 8 :
+        return (hei * wid);
+        break;
+    case 16 :
+    case 24 :
+        return (hei * wid * 3);
+        break;
+    }
 }
