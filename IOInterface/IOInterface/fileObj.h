@@ -24,9 +24,9 @@ public :
     ~files(){}
     files(string fName);
     char* pushToBuffer();
-    char* scratchData(int site, int len, string tar);
-    int transDWORD(string source);
-    int transWORD(string source);
+    char* scratchData(int site, int len, char tar[]);
+    int transDWORD(char *source);
+    int transWORD(char *source);
     /*
     fName        : the Name of the target file
     pushToBuffer : push data int to [buffer];
@@ -36,7 +36,7 @@ public :
 
 public :
     ifstream inFile;
-    char *buffer;
+    char* buffer;
     int fileLen;
 
 public :
